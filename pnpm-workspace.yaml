@@ -1,0 +1,23 @@
+packages:
+  - 'packages/*'
+
+# The git-flow toolchain ships on a prerelease cadence, so its packages are
+# regularly younger than the default release-age cutoff. Exclude them by name:
+# pnpm stops at the first entry matching a package, so a version-pinned entry
+# silently shadows every later one for that package — a stale pin is worse than
+# no pin. The policy still applies to everything else in the tree.
+minimumReleaseAgeExclude:
+  - '@cpdevtools/git-flow'
+  - '@cpdevtools/git-flow-cli'
+  - '@cpdevtools/ts-dev-utilities'
+  - '@cpdevtools/ts-dev-utilities-cli'
+  - '@oclif/core'
+
+# pnpm blocks dependency install scripts by default and fails the install until
+# each one is answered explicitly. esbuild (pulled in by tsup) is answered
+# `false`: its script only links a platform binary that the optional
+# @esbuild/<platform> package already provides, so the build works without it
+# and nothing arbitrary runs at install time. Verified by building after a
+# clean install.
+allowBuilds:
+  esbuild: false

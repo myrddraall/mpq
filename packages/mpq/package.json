@@ -1,0 +1,75 @@
+{
+  "name": "@myrddraall/mpq",
+  "version": "0.0.0-MAIN",
+  "description": "Read Blizzard MPQ archives (.StormReplay, .SC2Replay) in the browser and in Node",
+  "scripts": {
+    "build": "tsup",
+    "fixtures:fetch": "node tools/fetch-fixtures.mjs",
+    "format": "prettier --write \"{src,test}/**/*.ts\"",
+    "github.actions.build": "pnpm build",
+    "github.actions.pack": "gitflow pack",
+    "github.actions.test": "pnpm test",
+    "lint": "eslint src test",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.11",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.18.0",
+    "prettier": "^3.4.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "archive",
+    "blizzard",
+    "bzip2",
+    "heroes-of-the-storm",
+    "mpq",
+    "sc2replay",
+    "starcraft",
+    "stormreplay"
+  ],
+  "author": "Myrddraall",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myrddraall/mpq.git",
+    "directory": "packages/mpq"
+  },
+  "bugs": "https://github.com/myrddraall/mpq/issues",
+  "homepage": "https://github.com/myrddraall/mpq#readme",
+  "engines": {
+    "node": ">=24"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "source": "./src/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.ts"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts"
+}

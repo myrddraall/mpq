@@ -1,0 +1,7 @@
+# Declares what this project publishes. Read by `gitflow pack`.
+# Without this file the package is still built and tested, but never released.
+artifacts:
+  - type: npm
+    name: '${PACKAGE_NAME}'
+    registries:
+      - github-npm

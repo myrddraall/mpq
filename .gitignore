@@ -1,38 +1,26 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
+node_modules/
+dist/
+coverage/
+.DS_Store
+*.log
+.env
+.env.local
+.wireit/
 
 # IDEs and editors
 /.idea
 .project
 .classpath
-.c9/
 *.launch
 .settings/
-*.sublime-workspace
-
-# IDE - VSCode
 .vscode/*
 !.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
 !.vscode/extensions.json
 
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-testem.log
-/typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
-
-# System Files
-.DS_Store
-Thumbs.db
-/dist
+# Test fixtures that must never be committed.
+#
+# Real replays carry player names, BattleTags and chat. Drop your own
+# .StormReplay here and the end-to-end specs will pick it up automatically;
+# they skip when the directory is empty, so CI stays green without it.
+# `pnpm fixtures:fetch` also downloads a public replay into this directory.
+packages/*/test/fixtures/local/

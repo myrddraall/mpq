@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "noEmit": true,
+
+    // The library is environment-agnostic: no DOM lib, no Node lib in src/.
+    // TextDecoder is declared ambiently in src/env.d.ts so consumers do not
+    // inherit lib.dom just by importing this package.
+    "lib": ["ES2022"],
+    "types": [],
+
+    // `bundler` resolution suits tsup, but the emitted .d.ts must be consumable
+    // by plain `node16`/`nodenext` consumers, which is what publint verifies.
+    "moduleResolution": "bundler",
+
+    // Beyond `strict`: these catch the exact classes of looseness the 2018 code
+    // relied on (unchecked index access into the encryption table, optional
+    // header fields assumed present).
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "verbatimModuleSyntax": true,
+    "isolatedDeclarations": true
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "tools/**/*.mts"],
+
+  // `exclude` MUST be restated. The template's root tsconfig sets
+  // `"exclude": ["node_modules", "dist", "packages"]`, and an inherited
+  // `exclude` resolves relative to the ROOT config, so `packages` would
+  // exclude this entire project and tsc would report TS18003 "No inputs were
+  // found" despite the `include` above.
+  "exclude": ["node_modules", "dist"]
+}

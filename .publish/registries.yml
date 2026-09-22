@@ -1,0 +1,14 @@
+# Registries used when publishing release artifacts.
+# Referenced by each package's release-artifacts.yml (registries: [...]).
+# See registries.example.yml for all supported registry types.
+#
+# `auth` is the NAME of an environment variable read at publish time, never a
+# token value. GitHub Packages requires the npm scope to match the repository
+# owner, which is why this workspace publishes @myrddraall and not
+# @heroesbrowser (there is no heroesbrowser org).
+registries:
+  github-npm:
+    type: npm
+    url: https://npm.pkg.github.com
+    auth: GITHUB_TOKEN
+    scope: '@myrddraall'

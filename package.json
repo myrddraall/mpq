@@ -1,32 +1,129 @@
 {
-    "name": "@heroesbrowser/mpq",
-    "version": "0.1.3",
-    "description": "Extract files stored in Blizzard's mpq format in the browser",
-    "main": "./dist/index.js",
-    "typings": "./dist/index.d.ts",
-    "scripts": {
-        "clear-lib": "rimraf dist",
-        "build": "gulp build",
-        "prepublish": "npm run clear-lib && gulp build"
+  "name": "@myrddraall/mpq-workspace",
+  "version": "0.0.0-MAIN",
+  "private": true,
+  "description": "Blizzard MPQ archive reader — workspace root",
+  "scripts": {
+    "build": "devutil run build",
+    "check": "wireit",
+    "clean": "wireit",
+    "fix": "wireit",
+    "format": "wireit",
+    "gitflow": "gitflow",
+    "lint": "devutil run lint",
+    "postinstall": "devutil dev-link auto",
+    "prepare": "husky || true",
+    "reset": "wireit",
+    "test": "devutil run test",
+    "typecheck": "devutil run typecheck"
+  },
+  "devDependencies": {
+    "@cpdevtools/git-flow": "^1.1.1",
+    "@cpdevtools/git-flow-cli": "^1.1.1",
+    "@cpdevtools/ts-dev-utilities-cli": "^1.1.6",
+    "@types/node": "^20.17.11",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.18.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2",
+    "syncpack": "^13.0.0",
+    "typescript": "^5.9.3",
+    "wireit": "^0.14.13"
+  },
+  "keywords": [
+    "archive",
+    "blizzard",
+    "mpq",
+    "sc2replay",
+    "stormreplay"
+  ],
+  "author": "Myrddraall",
+  "license": "MIT",
+  "repository": "myrddraall/mpq.git",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.7.0",
+  "wireit": {
+    "fix": {
+      "dependencies": [
+        "fix.syncpack",
+        "fix.git-remove-tags",
+        "format"
+      ]
     },
-    "author": {
-        "name": "Myrddraall"
+    "fix.deps": {
+      "command": "devutil dep-versions fix .publish/deps.yml"
     },
-    "license": "ISC",
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-sourcemaps": "^2.6.4",
-        "gulp-typescript": "^4.0.2",
-        "rimraf": "^2.6.2",
-        "typescript": "^2.8.1"
+    "fix.git-remove-tags": {
+      "command": "git tag | xargs -r git tag -d"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/myrddraall/heroesbrowser-mpq.git"
+    "fix.syncpack": {
+      "command": "syncpack fix-mismatches",
+      "dependencies": [
+        "fix.deps"
+      ]
     },
-    "dependencies": {
-        "buffer": "^5.1.0",
-        "keybase-compressjs": "^1.0.1-c",
-        "long": "^4.0.0"
+    "format": {
+      "dependencies": [
+        "format.prettier",
+        "format.projects"
+      ]
+    },
+    "format.syncpack": {
+      "command": "syncpack format"
+    },
+    "format.prettier": {
+      "command": "prettier --write \"**/*.{ts,js,json,md,yml}\" --ignore-path .gitignore",
+      "dependencies": [
+        "format.syncpack"
+      ]
+    },
+    "format.projects": {
+      "command": "devutil run format"
+    },
+    "check": {
+      "dependencies": [
+        "check.deps",
+        "check.syncpack"
+      ]
+    },
+    "check.deps": {
+      "command": "devutil dep-versions check .publish/deps.yml"
+    },
+    "check.syncpack": {
+      "command": "syncpack list-mismatches"
+    },
+    "clean": {
+      "dependencies": [
+        "clean.install"
+      ]
+    },
+    "clean.git": {
+      "command": "git clean -dfX",
+      "cache": false
+    },
+    "clean.install": {
+      "command": "pnpm install",
+      "dependencies": [
+        "clean.git"
+      ],
+      "cache": false
+    },
+    "reset": {
+      "dependencies": [
+        "reset.git",
+        "pnpm.install"
+      ]
+    },
+    "reset.git": {
+      "command": "git reset --hard",
+      "cache": false
+    },
+    "pnpm.install": {
+      "command": "pnpm install",
+      "cache": false
     }
+  }
 }

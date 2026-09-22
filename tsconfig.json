@@ -1,22 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "baseUrl": "src",
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022"],
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
-    "moduleResolution": "node",
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "lib": [
-      "es6",
-      "dom"
-    ]
+    "noEmit": true
   },
-  "exclude": [
-    "../node_modules/**"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false
+  "exclude": ["node_modules", "dist", "packages"]
 }

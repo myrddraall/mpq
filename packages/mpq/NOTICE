@@ -1,0 +1,65 @@
+@myrddraall/mpq
+Copyright (c) 2018-2026 Myrddraall
+Licensed under the MIT License (see LICENSE).
+
+================================================================================
+Third-party code included in this package
+================================================================================
+
+src/compression/bzip2/
+--------------------------------------------------------------------------------
+The bzip2 decompressor in src/compression/bzip2/ is a TypeScript port of
+seek-bzip, which is distributed under the MIT License:
+
+    Copyright (c) 2013-2015 C. Scott Ananian
+    Copyright (c) 2012-2015 Eli Skeggs
+    Copyright (c) 2011 Kevin Kwok
+
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+seek-bzip credits the following lineage, which this port inherits:
+
+    Adapted from node-bzip, copyright 2012 Eli Skeggs.
+    Adapted from bzip2.js, copyright 2011 Kevin Kwok (antimatter15@gmail.com).
+    Based on micro-bunzip by Rob Landley (rob@landley.net).
+    Based on bzip2 decompression code by Julian R Seward (jseward@acm.org),
+    which also acknowledges contributions by Mike Burrows, David Wheeler,
+    Peter Fenwick, Alistair Moffat, Radford Neal, Ian H. Witten,
+    Robert Sedgewick and Jon L. Bentley.
+
+The Huffman table construction and symbol decode follow the recurrences in
+Julian Seward's reference bzip2 implementation (BZ2_hbCreateDecodeTables and
+GET_MTF_VAL in decompress.c).
+
+================================================================================
+Provenance of the MPQ reader
+================================================================================
+
+The archive reader descends from a chain of ports, each permissively licensed:
+
+    mpyq      -- Aku Kotkavuo         (Python)
+      -> mpyqjs            -- Farof
+      -> empeeku           -- nexus-devtools
+      -> @heroesbrowser/mpq -- Myrddraall (this library's 2018 incarnation)
+      -> @myrddraall/mpq    -- this package
+
+Algorithm details also follow StormLib (Ladislav Zezula), the reference C++
+MPQ implementation, which is BSD-licensed. No StormLib code is included; it is
+cited in comments where its behaviour defines the correct result.
