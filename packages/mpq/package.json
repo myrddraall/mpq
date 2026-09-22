@@ -2,6 +2,8 @@
   "name": "@myrddraall/mpq",
   "version": "0.0.0-MAIN",
   "description": "Read Blizzard MPQ archives (.StormReplay, .SC2Replay) in the browser and in Node",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "fixtures:fetch": "node tools/fetch-fixtures.mjs",
@@ -67,9 +69,7 @@
     "src",
     "!src/**/*.test.ts"
   ],
-  "sideEffects": false,
-  "type": "module",
-  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts"
+  "sideEffects": false,
+  "type": "module"
 }
